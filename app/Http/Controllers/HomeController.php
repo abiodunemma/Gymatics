@@ -10,9 +10,11 @@ class HomeController extends Controller
      * Create a new controller instance.
      *
      * @return void
+     * protected $redirectTo = '/login';
      */
     public function __construct()
     {
+        
         $this->middleware('auth');
     }
 

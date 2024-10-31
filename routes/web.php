@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,7 +10,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index']);
-Route::get('/members', [App\Http\Controllers\BookingController::class, 'apply']);
-Route::get('/traniner', [App\Http\Controllers\BookingController::class, 'get']);
+Route::POST('/booking', [App\Http\Controllers\BookingController::class, 'input']);
+Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->middleware('auth');
+Route::get('/members', [App\Http\Controllers\BookingController::class, 'apply'])->middleware('auth');
+Route::get('/traniner', [App\Http\Controllers\BookingController::class, 'get'])->middleware('auth');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

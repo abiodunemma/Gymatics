@@ -149,7 +149,7 @@
         <div class="hero-content">
             <h1>Achieve Your Fitness Goals</h1>
             <p>Join Gymatic today and start your journey toward a healthier, stronger you.</p>
-            <a href="#" class="btn">Get Started</a>
+            <a href="/register" class="btn">Get Started</a>
         </div>
     </div>
 </body>
