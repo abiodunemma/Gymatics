@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::POST('/booking', [App\Http\Controllers\BookingController::class, 'input']);
+Route::POST('/booking', [App\Http\Controllers\BookingController::class, 'store']);
 Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->middleware('auth');
 Route::get('/members', [App\Http\Controllers\BookingController::class, 'apply'])->middleware('auth');
 Route::get('/traniner', [App\Http\Controllers\BookingController::class, 'get'])->middleware('auth');

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('userid');
-            $table->string('email');
-            $table->string('morning')->nullable();
-            $table->string('evening')->nullable();
+            $table->string('session');
+            $table->date('session_date');
+            $table->string('status')->default('pending'); // or any other default value
+          //  $table->string('status')->default('pending'); // Booking status
             $table->timestamps();
         });
     }

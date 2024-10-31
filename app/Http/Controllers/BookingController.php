@@ -21,14 +21,25 @@ class BookingController extends Controller
         return view  ('/traniner');
     }
 
-    public function input(Request  $request){
+    public function store(Request  $request){
 
-        Booking::create([
-            'userid' => $request->userid,
-            'email' => $request-> email,
-            'morning' => $request-> morning,
-            'evening' => $request-> evening,
+             // Validate the request data
+             $request->validate([
+                'session' => 'required|string|max:255',
+                // Add validation rules for other fields if necessary
+            ]);
 
-        ]);
+            $session = $request->input('session');
+
+            
+    // Save the booking to the database
+    Booking::create(['session' => $session]);
+
+        // Booking::create([
+        //     'morning' => $request-> morning,
+        //     'evening' => $request-> evening,
+
+        // ]);
+        return response()->json(['message' => "You have successfully booked the {$session} session!"]);
     }
 }

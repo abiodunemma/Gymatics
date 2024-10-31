@@ -114,8 +114,8 @@
 <body>
     <form enctype="multipart/form-data" method="POST" action="/booking">
         @csrf
-        <input type="hidden" id="userid" value="{{  Auth::user()->id}}">
-        <input type="hidden" id="email" value="{{  Auth::user()->email}}">
+        <input type="hidden" id="session" name="session" value="">
+
     <!-- Booking Section -->
     <div class="booking-section">
         <div class="overlay"></div>
@@ -123,14 +123,14 @@
             <h1>Book Your Gym Session</h1>
             <p>Select your preferred session to reserve your spot:</p>
 
-            <div class="session-options" id="morning" name="morning">
+            <div class="session-options">
                 <div class="session-card morning">
                     <h2>Morning Session</h2>
                     <p>6:00 AM - 12:00 PM</p>
                     <button onclick="bookSession('Morning')">Book Morning</button>
                 </div>
 
-                <div class="session-card evening" id="evening" name"evening">
+                <div class="session-card evening">
                     <h2>Evening Session</h2>
                     <p>4:00 PM - 9:00 PM</p>
                     <button onclick="bookSession('Evening')">Book Evening</button>
@@ -140,9 +140,13 @@
     </div>
     </form>
     <script>
-        function bookSession(session) {
+        document.getElementById('session').value = session; // Set the session value
+        alert(`You have selected to book the ${session} session!`);
+        // Optionally, you can submit the form here
+        document.querySelector('form').submit();
+        {{--  function bookSession(session) {
             alert(`You have successfully booked the ${session} session!`);
-        }
+        }  --}}
     </script>
 
 </body>
