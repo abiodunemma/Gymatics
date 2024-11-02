@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('session');
-            $table->date('session_date');
-            $table->string('status')->default('pending'); // or any other default value
-          //  $table->string('status')->default('pending'); // Booking status
+            $table->unsignedBigInteger('userid');
+            $table->string('email');
+            $table->string('email1');
+            $table->string('name');
+            $table->enum('batch', ['morning', 'evening']);
+            $table->foreign('userid')->references('id')->on('users')->onDelete('cascade');
+        
             $table->timestamps();
         });
     }

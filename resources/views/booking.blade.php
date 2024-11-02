@@ -3,153 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Batch Booking</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0eaf0;
+        margin: 0;
+        padding: 0;
+    }
 
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+    header {
+        background: #f8f7f7;
+        color: #ee78b5;
+        padding: 20px;
+        text-align: center;
+    }
 
-            body, html {
-                height: 100%;
-                font-family: Arial, sans-serif;
-                color: #ffffff;
-                background: #121212;
-            }
+    main {
+        padding: 20px;
+    }
 
-            .booking-section {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                background: url('gym-background.jpg') no-repeat center center/cover;
-                color: #ffffff;
-            }
+    form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
 
-            .overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.7);
-                z-index: 1;
-            }
+    label {
+        display: block;
+        margin: 10px 0 5px;
+    }
 
-            .container {
-                position: relative;
-                z-index: 2;
-                text-align: center;
-                max-width: 600px;
-                padding: 20px;
-                background: rgba(0, 0, 0, 0.6);
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-            }
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-            h1 {
-                font-size: 32px;
-                margin-bottom: 10px;
-            }
+    fieldset {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
 
-            p {
-                font-size: 18px;
-                margin-bottom: 30px;
-            }
+    button {
+        background: #c91319;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-            .session-options {
-                display: flex;
-                gap: 20px;
-                justify-content: center;
-            }
+    button:hover {
+        background: #4cae4c;
+    }
 
-            .session-card {
-                flex: 1;
-                padding: 20px;
-                background-color: #1c1c1c;
-                border-radius: 8px;
-                text-align: center;
-                transition: transform 0.3s, background-color 0.3s;
-            }
+    .hidden {
+        display: none;
+    }
 
-            .session-card h2 {
-                font-size: 24px;
-                margin-bottom: 10px;
-                color: #ff4b2b;
-            }
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #f0ebeb;
+        color: rgb(220, 31, 213);
+    }
 
-            .session-card p {
-                font-size: 16px;
-                margin-bottom: 20px;
-                color: #cccccc;
-            }
-
-            .session-card button {
-                padding: 10px 20px;
-                border: none;
-                background-color: #ff4b2b;
-                color: #ffffff;
-                font-weight: bold;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-
-            .session-card button:hover {
-                background-color: #ff6a4a;
-            }
-
-            .session-card:hover {
-                transform: translateY(-5px);
-                background-color: #252525;
-            }
-
-        </style>
-
-    <title>Gym Session Booking</title>
-
+  </style>
 </head>
 <body>
-    <form enctype="multipart/form-data" method="POST" action="/booking">
-        @csrf
-        <input type="hidden" id="session" name="session" value="">
+    <header>
+        <h1>Welcome to Our Gym</h1>
+        <p>Book your session now!</p>
+    </header>
 
-    <!-- Booking Section -->
-    <div class="booking-section">
-        <div class="overlay"></div>
-        <div class="container">
-            <h1>Book Your Gym Session</h1>
-            <p>Select your preferred session to reserve your spot:</p>
+    <main>
+        <form action="/booking" accept="/welcome" method="POST" enctype="multipart/form-data">
+@csrf
 
-            <div class="session-options">
-                <div class="session-card morning">
-                    <h2>Morning Session</h2>
-                    <p>6:00 AM - 12:00 PM</p>
-                    <button onclick="bookSession('Morning')">Book Morning</button>
-                </div>
+            <input type="hidden" id="userid" name="userid" value="{{ Auth::user()->id  }}">
+            <input type="hidden" id="email" name="email" value="{{ Auth::user()->email  }}">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
 
-                <div class="session-card evening">
-                    <h2>Evening Session</h2>
-                    <p>4:00 PM - 9:00 PM</p>
-                    <button onclick="bookSession('Evening')">Book Evening</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    </form>
+            <label for="email">Your Email:</label>
+            <input type="email1" id="email1" name="email1" required>
+
+            <fieldset>
+                <legend>Select a Batch:</legend>
+                <label>
+                    <input type="radio" id="batch1" name="batch1" value="morning" required>
+                    Morning Batch
+                </label>
+                <label>
+                    <input type="radio" id="batch2" name="batch1" value="evening">
+                    Evening Batch
+                </label>
+            </fieldset>
+
+          <center>  <button type="submit">Book Now</button></center>
+        </form>
+
+        <div id="response" class="hidden"></div>
+    </main>
+
+    <footer>
+        <h3>Adeyemi-Abiodun | php laravel dev  </h3>
+    </footer>
+
     <script>
-        document.getElementById('session').value = session; // Set the session value
-        alert(`You have selected to book the ${session} session!`);
-        // Optionally, you can submit the form here
-        document.querySelector('form').submit();
-        {{--  function bookSession(session) {
-            alert(`You have successfully booked the ${session} session!`);
-        }  --}}
+        document.getElementById('booking-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const batch = document.querySelector('input[name="batch"]:checked').value;
+
+            document.getElementById('response').innerText = `Thank you, ${name}! You have booked the ${batch} batch.`;
+            document.getElementById('response').classList.remove('hidden');
+            this.reset();
+        });
     </script>
-    45545454455454454545
-78787878
 </body>
 </html>
+
 
